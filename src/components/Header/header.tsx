@@ -1,34 +1,24 @@
-"use client"
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import Link from "next/link";
+"use client";
+
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { Button } from "../ui/button";
+import { MenuIcon } from "../ui/icons/menu";
+import { Navigation } from "../Navigation/navigation";
 
 export const Header = () => {
   return (
     <header>
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <Link legacyBehavior passHref href="/">
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Главная страница
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link legacyBehavior passHref href="/catalog">
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Каталог
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+      <Navigation className="hidden sm:flex" />
+      <Sheet>
+        <SheetTrigger asChild className="sm:hidden">
+          <Button variant={"ghost"}>
+            <MenuIcon />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="flex flex-col gap-2">
+          <Navigation column={true} className="flex-none mt-10"/>
+        </SheetContent>
+      </Sheet>
     </header>
   );
 };

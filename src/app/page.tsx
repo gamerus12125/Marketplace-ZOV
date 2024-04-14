@@ -1,13 +1,9 @@
 "use client"
-import { Button } from "@/components/ui/button";
-import { useTheme } from "next-themes"
+
+import { MainPage } from "@/components/MainPage/main-page";
 
 export default function Home() {
-  const theme = useTheme()
-  console.log(theme)
   return (
-    <main className="">
-      <Button>Test</Button>
-    </main>
+    <MainPage />
   );
 }

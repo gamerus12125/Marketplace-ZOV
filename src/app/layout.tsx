@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/Header/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Inter } from 'next/font/google'
+import { AppSessionProvider } from "@/auth/session/app-session-provider";
  
 const inter = Inter({
   subsets: ['latin'],
@@ -22,10 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <AppSessionProvider>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         <Header />
         {children}
         </ThemeProvider>
+        </AppSessionProvider>
       </body>
     </html>
   );

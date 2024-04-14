@@ -7,8 +7,8 @@ import { Navigation } from "../Navigation/navigation";
 
 export const Header = () => {
   return (
-    <header>
-      <Navigation className="hidden sm:flex" />
+    <header className="border-b-2 border-b-slate-600">
+      <Navigation className="hidden sm:flex"/>
       <Sheet>
         <SheetTrigger asChild className="sm:hidden">
           <Button variant={"ghost"}>

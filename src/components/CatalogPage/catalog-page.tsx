@@ -1,34 +1,36 @@
 "use client";
 
 import { Product } from "@/lib/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductItem } from "../ProductItem/product-item";
-
-const initProducts: Product[] = [{
-  id: 1,
-  title: "Крутая штука",
-  description: "Очень крутая вещь покупайте",
-  cost: 1000,
-  creation_date: "13.04.2024",
-},
-{
-    id: 2,
-    title: "Крутая штука 2 klhbjekb  bbhrkjhbsejk klbjkihbr lkjile",
-    description: "КРУТО",
-    cost: 999,
-    creation_date: "13.04.2024",
-  },
-];
+import axios from "axios";
+import { useSearchParams } from "next/navigation";
 
 export const CatalogPage = () => {
-  const [products, setProducts] = useState<Product[]>(initProducts);
+  const [products, setProducts] = useState<Product[]>();
+  const params = useSearchParams();
+  const search = params.get("search") ?? "";
+
+  useEffect(() => {
+    axios
+      .get(`/api/products?search=${search}`)
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <main>
       <h1 className="text-3xl text-center mt-20 font-bold">Каталог</h1>
       <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mt-10 px-2 gap-3 sm:gap-0 justify-items-center">
-        {products.map((product) => (
-          <li><ProductItem product={product} key={product.id} /></li>
-        ))}
+        {products ? (
+          products.map((product) => (
+            <li key={product.id}>
+              <ProductItem product={product} />
+            </li>
+          ))
+        ) : (
+          <p>Loading</p>
+        )}
       </ul>
     </main>
   );

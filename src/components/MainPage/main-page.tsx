@@ -1,8 +1,12 @@
+"use client";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
-import { FindIcon } from "../ui/icons/find";
 import { Input } from "../ui/input";
+import { useState } from "react";
 
 export const MainPage = () => {
+  const [search, setSearch] = useState("");
+  const router = useRouter();
   return (
     <main className="mt-20">
       <div className="mx-auto w-fit p-1">
@@ -12,9 +16,16 @@ export const MainPage = () => {
         </span>
       </div>
       <div className="flex gap-1 mt-20 w-fit mx-auto sm:mt-52">
-        <Input type="text" placeholder="Поиск" />
-        <Button variant="outline">
-          <FindIcon />
+        <Input
+          type="text"
+          placeholder="Поиск"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Button
+          variant="outline"
+          onClick={() => router.push(`/catalog?search=${search}`)}
+        >
+          Найти
         </Button>
       </div>
     </main>

@@ -21,7 +21,9 @@ export const ProfileButton = () => {
       <DropdownMenuTrigger asChild>
         <Button variant={"ghost"} className="p-0 rounded-full">
           <Avatar>
-
+            <AvatarImage
+              src={session.data?.user?.image as string | undefined}
+            />
             <AvatarFallback>AC</AvatarFallback>
           </Avatar>
         </Button>
@@ -35,7 +37,7 @@ export const ProfileButton = () => {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem asChild>
             <Link href="/profile" className="flex items-center">
               <User className="mr-2 h-4 w-4" />
               Профиль
